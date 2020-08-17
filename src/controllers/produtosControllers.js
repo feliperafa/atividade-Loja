@@ -57,14 +57,15 @@ exports.creatProduct = (req, res) => {
 }
 
 exports.listCreatEnd = (req, res) => {
-    Produto.findOne( { _id:  -1 }.params, (error, produto) => {
+
+    Produto.find({}, (error, produto) => {
         if (error) {
             res.send(error)
         }
         const response = {
-            message: 'Ultimo Registro Cadastrado é!',
+            message: 'Todos os Produtos Listados com Sucesso!',
             data: produto
         }
         res.status(200).json(response)
-    })
+    }).sort({data_insert: -1}).limit(1)
 }
